@@ -1,7 +1,12 @@
 <template>
 	<div class="input-box">
 		<!-- <button @click="isappear">退出</button> -->
-		<div v-for="list in lists" :class="{rightmsg: list.chatwith == $route.params.id, leftmsg: list.chatwith != $route.params.id}" class="msgbox">
+		<div
+			v-for="(list,index) in lists"
+			:class="{rightmsg: list.chatwith == $route.params.id, leftmsg: list.chatwith != $route.params.id}"
+			class="msgbox"
+			:key="index"
+		>
 			<div v-if="list.chatwith != $route.params.id">
 				<img :src="list.hrf" alt="头像" width="30" height="30">
 			</div>
@@ -33,6 +38,9 @@
 
 			// 隐藏导航
 			this.$store.commit('disappear')
+
+			// 改变头部的名字
+			this.$store.commit('CHANGECHATTO',this.$route.params.id)
 
 			// 滚动条到最低
 			this.flowbutton()
@@ -121,7 +129,6 @@
 					}
 				}
 				// 如果聊天列表没有，则添加，有则跳过
-				// 聊天入口列表，入口列表属性，聊天内容列表
 				if (num == 0) {
 					// 添加聊天内容列表
 					this.$store.commit('ADDCHATCONTENT',id)

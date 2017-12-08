@@ -27,7 +27,7 @@
 			<span>{{mymsg.describe}}</span>
 		</div>
 		<div 
-			id="gochat"
+			class="gochat"
 			v-if="mymsg.name != $store.state.usermsg.myid.name"
 		>
 			<p>
@@ -38,8 +38,18 @@
 				</router-link>
 			</p>
 		</div>
-		<div>
-			<!-- 这里写一个修改资料的接口 -->
+		<!-- 这里写一个修改资料的接口 -->
+		<div
+			class="gochat"
+			v-if="mymsg.name == $store.state.usermsg.myid.name"
+		>
+			<p>
+				<router-link
+					to="/changeMyMsg"
+				>
+					修改资料
+				</router-link>
+			</p>
 		</div>
 	</div>
 </template>
@@ -56,6 +66,8 @@
 		mounted () {
 			// 隐藏导航
 			this.$store.commit('disappear')
+			// 改变头部的名字
+			this.$store.commit('CHANGECHATTO',this.$route.params.id)
 			// 获取并关联数据
 			for (let p in this.$store.state.friendsmsg) {
 				// 找出好友列表中的该对象进行关联
@@ -77,21 +89,24 @@
 		border-bottom: 1px solid #eee;
 		/*height: ;*/
 	}
-	#gochat {
+	.myfriendmsg span {
+		min-width: 35%;
+	}
+	.gochat {
 		height: 100px;
 		display: flex;
-		justify-content: center;
-		align-items: center;
+		justify-content: center !important;
+		align-items: center !important;
 	}
-	#gochat p {
+	.gochat p {
+		display: inline-block;
 		font-weight: bold;
-		
 		border: 2px solid #777;
 		border-radius: 10px;
 		padding: 10px;
 		
 	}
-	#gochat a {
+	.gochat a {
 		text-decoration: none;
 		color: #000;
 	}

@@ -1,8 +1,8 @@
 export const state = {
 		// 切换消失的条件
 		'isappear': true,
-		// 跳转条件
-		'skip': true,
+		// 记录聊天对象
+		'chatname': '对方的名字',
 		// 聊天列表
 		'list': {
 		},
@@ -61,7 +61,7 @@ export const state = {
 				'img': 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1633698864,662530431&fm=27&gp=0.jpg',
 				'imgtwo': 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2976782369,217827492&fm=27&gp=0.jpg',
 				'number': '63457345234523',
-				'describe': '我叫没有鬼，来自火星',
+				'describe': '我叫没有鬼，来自火星sdkjfoas;djfoasdjfasdjf阿里肯定就发动反击阿喀琉斯',
 				'sex': '男',
 				'location': '中国',
 				"userId": "44444444444",

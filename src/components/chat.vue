@@ -22,7 +22,7 @@
 					<img slot="icon" :src="list.img" width="40" height="40" style="float: left; margin-right: 10px;">
 					<div>
 						<p class="msgtime">{{list.time}}</p>
-						<mt-badge size="small" v-show="$store.state.skip">10</mt-badge>
+						<mt-badge size="small" v-show="true">10</mt-badge>
 					</div>
 				</mt-cell-swipe>
 			</div>

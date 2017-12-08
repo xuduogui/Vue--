@@ -7,6 +7,7 @@ import more from '@/components/more'
 import user from '@/components/users'
 import chatwith from '@/components/chat/chatwith'
 import friendsmsg from '@/components/friends/friendsmsg'
+import changeMyMsg from "@/components/changeMyMsg";
 
 import wait from '@/components/wait/wait'
 
@@ -54,6 +55,11 @@ export default new Router({
       path: '/wait',
       name: wait,
       component: wait
+    },
+    {
+      path: '/changeMyMsg',
+      name: changeMyMsg,
+      component: changeMyMsg
     }
   ]
 })

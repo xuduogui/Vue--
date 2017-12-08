@@ -2,6 +2,11 @@ import {state} from './state'
 import Vue from 'vue'
 
 export const mutations = {
+		// 改变聊天对象的名字，在头部显示
+		CHANGECHATTO (state,name) {
+			state.chatname = name
+		},
+
 		// 导航的消失与出现
 		disappear (state) {
 			state.isappear = false

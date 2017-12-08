@@ -3,7 +3,7 @@
     <div id="apphead">
       <!-- 非主页面头部显示 -->
       <mt-header
-        title="柒零"
+        :title=$store.state.chatname
         style="height: 100%; background: #444"
         v-if="!$store.state.isappear"
       >
@@ -15,10 +15,10 @@
 
       <!-- 主页头部显示 -->
       <mt-header
-        title="柒零"
         style="height: 100%; background: #444"
         v-if="$store.state.isappear"
       >
+        <span slot="left" class="headLog">柒 零</span>
         <mt-button icon="more" slot="right"></mt-button>
       </mt-header>
        
@@ -89,6 +89,9 @@ export default {
 /*头部样式*/
 #apphead {
   background-color: #444;
+}
+.headLog {
+  font: 16px "微软雅黑";
 }
 
 /*导航样式*/
