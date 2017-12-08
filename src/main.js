@@ -6,11 +6,16 @@ import router from './router'
 import axios from 'axios'
 import App from './App'
 import store from './store/store'
+// 引入mint-ui
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
 
 
 Vue.config.productionTip = false
 
 Vue.prototype.$http = axios
+
+Vue.use(MintUI)
 
 
 

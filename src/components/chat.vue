@@ -1,30 +1,34 @@
 <template id="chat-out">
 		<div>
-			<router-link
-				class="chatout"
-				:to="'/chatwith/'+list.name"
+			<div 
+				@click="toRouter(list.name)"
 				v-for="(list,index) in lists"
 				:key="index"
-				v-if="$store.state.isappear"
+				class="chatItem"
 			>
-				<div class="chatOutUser">
-					<!-- 用户头像 -->
-					<img :src="list.img" width="40" height="40" class="borderra">
-					<!-- 用户名和上一条聊天记录 -->
+				<mt-cell-swipe
+					:right="[
+						{
+							content: '删除',
+							style: { background: 'red', color: '#fff' },
+							handler: function() {
+								$store.dispatch('deleteChatList',list.name)
+							}
+						}
+					]"
+				>
+					<span slot="title" class="myname">{{list.name}}</span>
+					<p slot="title" class="lastmsg">{{list.lastmsg}}</p>
+					<img slot="icon" :src="list.img" width="40" height="40" style="float: left; margin-right: 10px;">
 					<div>
-						<p>{{list.name}}</p>
-						<p class="chatOutMsg">{{list.lastmsg}}</p>
+						<p class="msgtime">{{list.time}}</p>
+						<mt-badge size="small" v-show="$store.state.skip">10</mt-badge>
 					</div>
-				</div>
-				
-				<!-- 时间戳 -->
-				<p class="chatTime">{{list.time}}</p>
-				<div class="deleteSpan" @click.stop="$store.commit('DELETELIST',list.name)">
-					X
-				</div>
-			</router-link>
-			<p v-if="isEmpty(lists)">你的消息空空如也</p>
+				</mt-cell-swipe>
+			</div>
 
+
+			<p v-if="isEmpty(lists)">你的消息空空如也</p>
 			<button @click="$store.commit('DELETELIST','我的名字')">测试</button>
 		</div>
 </template>
@@ -50,6 +54,11 @@
 			        return false;
 			    }
 			    return true;
+			},
+			// 事件触发路由跳转
+			toRouter (to) {
+				// 跳转相应的to指向的页面
+				this.$router.push('/chatwith/'+to)
 			},
 			// 这是测试
 			// testone () {
@@ -81,50 +90,21 @@
 </script>
 
 <style type="text/css">
-	/*聊天栏目入口*/
-.chatout {
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	background: #fff;
-	border-bottom: 1px solid #ddd;
-	text-decoration: none;
-	font-size: 13px;
-	color: #000;
-	position: relative;
+.chatItem {
+	border-bottom: 1px solid #eee;
 }
-.chatOutUser {
-	width: 80%;
+.myname {
+	font: 14px "微软雅黑" !important;
 	overflow: hidden;
-	display: flex;
-	justify-content: flex-start;
-	padding: 5px;
-}
-.chatOutUser div {
-	margin-left: 15px;
-	margin-top: 5px;
-}
-.chatOutMsg {
-	color: #666;
-	font-size: 12px;
 	height: 16px;
-	overflow: hidden;
 }
-.chatTime {
-	text-align: center;
-	height: 14px;
-	line-height: 14px;
-	margin-right: 5px;
+.lastmsg {
+	font: 12px "微软雅黑";
 	color: #666;
-	font-size: 12px;
+	overflow: hidden;
+	height: 16px;
 }
-.deleteSpan {
-	position: absolute;
-	width: 20px;
-	height: 20px;
-	right: 0;
-	font-size: 20px;
-
+.msgtime {
+	font: 9px "微软雅黑";
 }
 </style>

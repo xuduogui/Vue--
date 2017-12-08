@@ -1,20 +1,26 @@
 <template>
   <div id="app">
     <div id="apphead">
-      <router-link
-        to="/chat"
+      <!-- 非主页面头部显示 -->
+      <mt-header
+        title="柒零"
+        style="height: 100%; background: #444"
         v-if="!$store.state.isappear"
       >
-         <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=838537442,2292847737&fm=27&gp=0.jpg" height="25" width="25">
-      </router-link>
-      <div v-if="$store.state.isappear" class="outheadbox">
-        <div id="outapphead">
-          <div class="logmsg">柒零</div>
-          <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=616721060,353505085&fm=27&gp=0.jpg" width="25" height="25">
-        </div>
-        
-        
-      </div>
+        <router-link to="/chat" slot="left">
+          <mt-button icon="back"></mt-button>
+        </router-link>
+        <mt-button icon="more" slot="right"></mt-button>
+      </mt-header>
+
+      <!-- 主页头部显示 -->
+      <mt-header
+        title="柒零"
+        style="height: 100%; background: #444"
+        v-if="$store.state.isappear"
+      >
+        <mt-button icon="more" slot="right"></mt-button>
+      </mt-header>
        
     </div>
     
@@ -83,35 +89,6 @@ export default {
 /*头部样式*/
 #apphead {
   background-color: #444;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-#apphead img {
-  margin: 0 10px;
-  border: none;
-  border-radius: 6px;
-
-}
-.outheadbox {
-  width: 100%;
-  height: 100%;
-}
-#outapphead {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  font: 1.2rem '微软雅黑';
-  color: #eee;
-  letter-spacing: 4px;
-}
-.logmsg {
-  width: 90%;
-  display: flex;
-  justify-content: center;
-  padding-left: 10%;
 }
 
 /*导航样式*/

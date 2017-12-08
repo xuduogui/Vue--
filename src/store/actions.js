@@ -2,7 +2,20 @@ import axios from 'axios'
 import {state} from './state'
 
 export const actions = {
-	// 封装一个 ajax 方法
+	// 告诉后台删除某个好友聊天入口列表
+	deleteChatList (context,list) {
+		axios({
+			method: 'post',
+			url: 'chatOut.action',
+			data: {"user_id": state.mycookie, "friends_id": state.friendsmsg[list].userId}
+		}).then(function (params) {
+			context.commit('DELETELIST', list)
+		}).catch(function (params) {
+			// 暂时用错误回调mutations
+			context.commit('DELETELIST', list)
+		})
+	},
+
     // 获得聊天栏数据，包括聊天记录
     getChatData (context) {
       axios({
@@ -11,11 +24,11 @@ export const actions = {
         data: {"userId": state.mycookie}
       }).then(function (res) {
       	// 请求更新数据
-      	context.commit('GETFRIENDSDATA',res)
+      	context.commit('GETFRIENDSDATA', res)
       	// 更新个人信息
     	context.commit('CHANGEMYMSG')
     	// 更新聊天记录
-      	context.commit('GETCHATCONTENT',res)
+      	context.commit('GETCHATCONTENT', res)
       	// 更新聊天列表信息
       	context.commit('CHANGELASTMSG')
       }).catch(function (err) {
@@ -40,7 +53,7 @@ export const actions = {
     			context.dispatch('receiveMsg')
     		} else {
     			// 处理从后台接收的好友消息
-	    		context.commit('RECEIVEMSG',res)
+	    		context.commit('RECEIVEMSG', res)
 	    		// 函数回调
 	    		context.dispatch('receiveMsg')
     		}
@@ -72,7 +85,7 @@ export const actions = {
     	}).then(function () {
     		// body...
     	}).catch(function () {
-    		alert("1111")
+			// 发送失败
     	})
     },
 }

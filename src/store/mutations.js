@@ -3,10 +3,10 @@ import Vue from 'vue'
 
 export const mutations = {
 		// 导航的消失与出现
-		disappear: function (state) {
+		disappear (state) {
 			state.isappear = false
 		},
-		appear: function (state) {
+		appear (state) {
 			state.isappear = true
 		},
 		// 添加聊天入口列表，list
@@ -213,7 +213,7 @@ export const mutations = {
 					}
 				}
 			}
-			// 如果好友列表里面有
+			// 如果好友列表里面没有
 			if (num == 0) {
 				alert('有一条消息来自陌生人，但是我就是不收')
 			}
