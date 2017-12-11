@@ -161,9 +161,8 @@ export const mutations = {
 			}
 		},
 
-		// 接受好友消息
+		// 处理接受的好友消息
 		RECEIVEMSG (state,msg) {
-			console.log(msg)
 			let num = 0
 			// 如果聊天入口栏里面有
 			for (let p in state.list) {

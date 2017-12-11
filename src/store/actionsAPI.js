@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {state} from './state'
 
-export const actions = {
+export const actionsAPI = {
 	// 告诉后台删除某个好友聊天入口列表
 	deleteChatList (context,list) {
 		axios({

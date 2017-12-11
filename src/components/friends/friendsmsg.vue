@@ -71,7 +71,7 @@
 			// 获取并关联数据
 			for (let p in this.$store.state.friendsmsg) {
 				// 找出好友列表中的该对象进行关联
-				if (p == this.$route.params.id) {
+				if (this.$store.state.friendsmsg[p].name == this.$route.params.id) {
 					this.mymsg = this.$store.state.friendsmsg[p]
 				}
 			}
@@ -101,10 +101,10 @@
 	.gochat p {
 		display: inline-block;
 		font-weight: bold;
-		border: 2px solid #777;
+		/* border: 2px solid #777; */
 		border-radius: 10px;
-		padding: 10px;
-		
+		padding: 15px;
+		background-color: #FFA500;
 	}
 	.gochat a {
 		text-decoration: none;

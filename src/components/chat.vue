@@ -7,15 +7,13 @@
 				class="chatItem"
 			>
 				<mt-cell-swipe
-					:right="[
-						{
-							content: '删除',
-							style: { background: 'red', color: '#fff' },
-							handler: function() {
-								$store.dispatch('deleteChatList',list.name)
-							}
+					:right="[{
+						content: '删除',
+						style: { background: 'red', color: '#fff' },
+						handler: function() {
+							$store.dispatch('deleteChatList',list.name)
 						}
-					]"
+					}]"
 				>
 					<span slot="title" class="myname">{{list.name}}</span>
 					<p slot="title" class="lastmsg">{{list.lastmsg}}</p>
@@ -29,7 +27,8 @@
 
 
 			<p v-if="isEmpty(lists)">你的消息空空如也</p>
-			<button @click="$store.commit('DELETELIST','我的名字')">测试</button>
+			<!-- <button @click="$store.commit('DELETELIST','我的名字')">测试</button>
+			<button @click="$store.dispatch('isMyTest')">测试</button> -->
 		</div>
 </template>
 

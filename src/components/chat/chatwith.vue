@@ -32,7 +32,7 @@
 				lists: this.$store.state.chatcontent[this.$route.params.id]
 			}
 		},
-		mounted: function (argument) {
+		mounted: function () {
 			// 获取cookie
             this.$store.commit('GETCOOKIE')
 
@@ -72,10 +72,11 @@
 
 				// 获得当前时间
 				var t = new Date()
-				var tt
-				t.getMinutes() > 9 ? tt = t.getMinutes() : tt = "0" + t.getMinutes()
+				// 用minutes保存分钟
+				var minutes
+				t.getMinutes() > 9 ? minutes = t.getMinutes() : minutes = "0" + t.getMinutes()
 				// 设置时间格式 00:00
-				var _thistime = t.getHours() + ":" +  tt
+				var _thistime = t.getHours() + ":" +  minutes
 				// 发送的消息模式
 				var mylist = {
 						// 这里通过是否有id来判断是谁发送的消息
@@ -92,14 +93,13 @@
 				mylist.msg = e.value
 				// 更新数据
 				if (e.value.length != 0 && e.value != '\n') {
-					// 获取聊天对象的名字
-					var _id = this.$route.params.id
-
 					// 发送消息
 					// 这里改变了store，隐式，存在待优化
 					// 将自己发送的内容push进store
 					// 这里没有及时动态加载，发送的第一条消息会推迟
 					// 已经动态加载，解决了推迟信息的问题，并且没有隐式改变
+					// 获取聊天对象的名字
+					var _id = this.$route.params.id
 					this.$store.commit('TACKCHAT',{id:_id,msg:mylist})
 
 					// 向后台发送
@@ -109,7 +109,6 @@
 					e.value = null;
 				} else {
 					e.value = null
-					return
 				}
 				
 				// 滚动条到最低
@@ -139,7 +138,7 @@
 				var box = document.getElementsByClassName('input-box')[0]
 				var btview = document.getElementById('btview')
 				box.scrollIntoView(false);
-			}
+			},
 		}
 
 
@@ -152,6 +151,7 @@
 	}
 	.input-box {
 		overflow-y: auto;
+		/* padding-bottom: 80%; */
 	}
 	.input-box img {
 		border-radius: 5px;
@@ -182,8 +182,6 @@
 	}
 	/*.myinput {
 		display: flex;
-	
-		
 	}*/
 	.text-input {
 		display: flex;
@@ -193,18 +191,19 @@
 		height: 7%;
 		width: 100%;
 		background: #eee;
+		/* margin-bottom: 80%; */
 	}
 	.text-input textarea {
 		margin: 10px 0 0 10px;
 		border: none;
 		border-bottom: 1px solid #bbb;
-		width: 70%;
+		width: 80%;
 		background: #eee;
 		height: 28px;
 		line-height: 28px;
 	}
 	.text-input input {
-		width: 40px;
+		width: 10%;
 		height: 30px;
 		border: none;
 		margin: 10px 20px 0 0;
