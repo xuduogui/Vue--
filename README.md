@@ -7,7 +7,7 @@
           6.界面的优化处理
           7.后台友好交互
 
-技术栈：HTML,CSS,JS,vue-router,vuex,Mint UI,vue-cli，webpack，Babel，git
+技术栈：HTML,CSS,JS,vue-router,vuex,axios,Mint UI,vue-cli，webpack，Babel，git
 
 
 
