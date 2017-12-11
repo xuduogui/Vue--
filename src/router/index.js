@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import chat from '@/components/chat'
 import friends from '@/components/friends'
 import more from '@/components/more'
@@ -8,7 +7,6 @@ import user from '@/components/users'
 import chatwith from '@/components/chat/chatwith'
 import friendsmsg from '@/components/friends/friendsmsg'
 import changeMyMsg from "@/components/changeMyMsg";
-
 import wait from '@/components/wait/wait'
 
 Vue.use(Router)
