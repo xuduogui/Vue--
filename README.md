@@ -6,6 +6,8 @@
           5.聊天记录的动态加载
           6.界面的优化处理
           7.后台友好交互
+          8.消息的提醒和提醒数目显示
+
 
 技术栈：HTML,CSS,JS,vue-router,vuex,axios,Mint UI,vue-cli，webpack，Babel，git
 
