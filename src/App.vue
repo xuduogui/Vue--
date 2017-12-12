@@ -27,6 +27,7 @@
     <div id="routerHeight">
       <router-view></router-view>
     </div>
+    
     <!-- 导航 -->
     <div class="allIndex" v-if="$store.state.isappear">
       <router-link to="/chat"><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1105922480,1672123235&fm=27&gp=0.jpg" width="40" height="40"></router-link>
@@ -117,6 +118,7 @@ export default {
 /*显示背景样式*/
 #routerHeight {
   width: 100%;
+  height: 100%;
   background: #eee;
   overflow: auto;
 }

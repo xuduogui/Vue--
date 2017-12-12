@@ -16,7 +16,7 @@
 		<div>
 			<router-link
 				class="friendsbus"
-				:to="'/friendsmsg/'+list.name"
+				:to="'/friendsmsg/'+list.userId"
 				v-for="list in lists"
 				:key="list.name"
 				v-if="list.userId != $store.state.mycookie"

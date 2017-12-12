@@ -7,12 +7,26 @@ export const actionsAPI = {
 		axios({
 			method: 'post',
 			url: 'chatOut.action',
-			data: {"user_id": state.mycookie, "friends_id": state.friendsmsg[list].userId}
+			data: {"user_id": state.mycookie, "friend_id": state.friendsmsg[list].userId}
 		}).then(function (params) {
 			context.commit('DELETELIST', list)
 		}).catch(function (params) {
 			// 暂时用错误回调mutations
 			context.commit('DELETELIST', list)
+		})
+	},
+	// 告诉后台清除某人的消息提示
+	clearNum (context,msg) {
+		axios({
+			method: 'post',
+			url: 'clearNum.action',
+			data: {"user_id": msg.user_id,"friend_id": msg.friend_id}
+		}).then(function (params) {
+			// 清除本地数据
+			context.commit('CLEARNUM', msg.name)
+		}).catch(function (params) {
+			// 清除本地数据
+			context.commit('CLEARNUM', msg.name)
 		})
 	},
 

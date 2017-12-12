@@ -7,10 +7,10 @@
 		</div>
 		<div>
 			<span>昵称</span>
-			<span>{{$route.params.id}}</span>
+			<span>{{mymsg.name}}</span>
 		</div>
 		<div>
-			<span>微信号</span>
+			<span>代号</span>
 			<span>{{mymsg.number}}</span>
 		</div>
 		<div style="height: 30px; background: transparent;"></div>
@@ -32,7 +32,7 @@
 		>
 			<p>
 				<router-link
-					:to="'/chatwith/'+mymsg.name"
+					:to="'/chatwith/'+mymsg.userId"
 				>
 					发起聊天
 				</router-link>
@@ -41,7 +41,7 @@
 		<!-- 这里写一个修改资料的接口 -->
 		<div
 			class="gochat"
-			v-if="mymsg.name == $store.state.usermsg.myid.name"
+			v-if="mymsg.userId == $store.state.usermsg.myid.userId"
 		>
 			<p>
 				<router-link
@@ -71,7 +71,7 @@
 			// 获取并关联数据
 			for (let p in this.$store.state.friendsmsg) {
 				// 找出好友列表中的该对象进行关联
-				if (this.$store.state.friendsmsg[p].name == this.$route.params.id) {
+				if (p == this.$route.params.id) {
 					this.mymsg = this.$store.state.friendsmsg[p]
 				}
 			}

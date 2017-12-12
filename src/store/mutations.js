@@ -3,8 +3,8 @@ import Vue from 'vue'
 
 export const mutations = {
 		// 改变聊天对象的名字，在头部显示
-		CHANGECHATTO (state,name) {
-			state.chatname = name
+		CHANGECHATTO (state,id) {
+			state.chatname = state.friendsmsg[id].name
 		},
 
 		// 导航的消失与出现
@@ -26,7 +26,8 @@ export const mutations = {
 			state.list[obj] = Object.assign({}, state.list[obj], state.friendsmsg[obj])
 			state.list[obj].userId = state.mycookie
 			state.list[obj] = Object.assign({},state.list[obj],{
-				"aimUserId": state.friendsmsg[obj].userId
+				"aimUserId": state.friendsmsg[obj].userId,
+				"num": 0,
 			})
 			state.list = Object.assign({},state.list,{})
 		},
@@ -74,6 +75,12 @@ export const mutations = {
 				}
 			}
 		},
+		// 清除消息提示
+		CLEARNUM (state,id) {
+			if (state.list[id]) {
+				state.list[id].num = 0
+			}
+		},
 
 		// 第一次后台数据的入口
 		// 获得后台数据，通过action
@@ -82,20 +89,20 @@ export const mutations = {
 			// 更新好友列表
 			state.friendsmsg = Object.assign({}, state.friendsmsg, msg.data.data.friendsList)
 			// 更新聊天好友列表
-			// state.list = msg.data.data.chatList
 			state.list = Object.assign({}, state.list, msg.data.data.chatList)
 			// 增加时间项目
-			// 目前userId在前端取出来，觉得不合理，准备交流
 			for (let p in state.list) {
-				state.list[p] = Object.assign({}, state.list[p], {
-					'time': '',
-					'lastmsg': '无新消息',
-					'aimUserId': state.friendsmsg[p].userId,
-					'userId': state.mycookie,
-				})
-				// 添加聊天内容列表，并给个空的初值（数组）
-				state.chatcontent[p] = Object.assign({}, state.chatcontent[p], p)
-				state.chatcontent[p] = []
+				if (state.friendsmsg[p]) {
+					state.list[p] = Object.assign({}, state.list[p], {
+						'time': '',
+						'lastmsg': '无新消息',
+						'aimUserId': state.friendsmsg[p].userId,
+						'userId': state.mycookie,
+					})
+					// 添加聊天内容列表，并给个空的初值（数组）
+					state.chatcontent[p] = Object.assign({}, state.chatcontent[p], p)
+					state.chatcontent[p] = []
+				}
 			}
 		},
 		// 第一次加载，获取聊天记录
@@ -120,7 +127,7 @@ export const mutations = {
 									'msg': list[i].msg,
 									'time': list[i].date,
 									'hrf': state.usermsg.myid.img,
-									'chatwith': state.friendsmsg[q].name,
+									'chatwith': state.friendsmsg[q].userId,
 									'userId': state.mycookie,
 									'aimUserId': list[i].receive_id,
 								})
@@ -129,7 +136,7 @@ export const mutations = {
 									'msg': list[i].msg,
 									'time': list[i].date,
 									'hrf': state.friendsmsg[q].img,
-									'chatwith': state.usermsg.myid.name,
+									'chatwith': state.usermsg.myid.userId,
 									'userId': list[i].receive_id,
 									'aimUserId': state.mycookie,
 								})
@@ -141,7 +148,7 @@ export const mutations = {
 									'msg': list[i].msg,
 									'time': list[i].date,
 									'hrf': state.usermsg.myid.img,
-									'chatwith': state.friendsmsg[q].name,
+									'chatwith': state.friendsmsg[q].userId,
 									'userId': state.mycookie,
 									'aimUserId': list[i].receive_id,
 								})
@@ -150,7 +157,7 @@ export const mutations = {
 									'msg': list[i].msg,
 									'time': list[i].date,
 									'hrf': state.friendsmsg[q].img,
-									'chatwith': state.usermsg.myid.name,
+									'chatwith': state.usermsg.myid.userId,
 									'userId': list[i].receive_id,
 									'aimUserId': state.mycookie,
 								})
@@ -166,12 +173,12 @@ export const mutations = {
 			let num = 0
 			// 如果聊天入口栏里面有
 			for (let p in state.list) {
-				// 这个地方
 				if (state.list[p].aimUserId == msg.data.data.send_id) {
 					// 改变聊天入口列表
 					state.list[p] = Object.assign({},state.list[p],{
 						"lastmsg": msg.data.data.msg,
 						"time": msg.data.data.date,
+						"num": msg.data.data.num,
 					})
 					// 改变聊天内容列表
 					state.chatcontent[p].push({
@@ -198,6 +205,7 @@ export const mutations = {
 							"lastmsg": msg.data.data.msg,
 							"time": msg.data.data.date,
 							"userId": state.mycookie,
+							"num": msg.data.data.num,
 						})
 						state.list = Object.assign({},state.list,{})
 

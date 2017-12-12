@@ -4,7 +4,7 @@
 		<div>
 			<router-link
 				class="chatout"
-				:to="'/friendsmsg/'+list.name"
+				:to="'/friendsmsg/'+list.userId"
 				style="margin: 10px 0;border-radius: 8px;"
 			>
 			<div class="chatOutUser addInformation">
@@ -13,7 +13,7 @@
 				<!-- 用户名和账号 -->
 				<div>
 					<p>{{list.name}}</p>
-					<span class="chatOutMsg">账号：{{list.number}}</span>
+					<span class="chatOutMsg">代号：{{list.number}}</span>
 				</div>
 			</div>
 			
@@ -40,6 +40,8 @@
 		mounted () {
 			// 显示导航
 			this.$store.commit('appear')
+			// 更新个人信息
+    		this.$store.commit('CHANGEMYMSG')
 		},
 
 	})

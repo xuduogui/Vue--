@@ -19,7 +19,8 @@
 		<div class="text-input">
 			<textarea type="text" name="myipt" @keyup.enter="input"></textarea>
 			<!-- <p contenteditable="true" id="input">111</p> -->
-			<input type="submit" name="myipt" @click="input">
+			<!-- <input type="submit" name="myipt" @click="input"> -->
+			<mt-button type="default" @click="input" class="my-send-bt">发送</mt-button>
 		</div>
 	</div>
 </template>
@@ -33,9 +34,6 @@
 			}
 		},
 		mounted: function () {
-			// 获取cookie
-            this.$store.commit('GETCOOKIE')
-
 			// 隐藏导航
 			this.$store.commit('disappear')
 
@@ -52,11 +50,14 @@
 			let _state = this.$store.state
 			// 告诉后台聊天入口列表创建
 			// 如果聊天内容为空则不创建
-			if (_state.chatcontent[this.$route.params.id].length > 0 && !_state.list[this.$route.params.id]) {
+			if (_state.chatcontent[this.$route.params.id] && !_state.list[this.$route.params.id]) {
+				// 发送请求到后台，创建列表
 				this.$store.dispatch('sendChatList',{"user_id": _state.mycookie,"friend_id": _state.friendsmsg[this.$route.params.id].userId})
 				// 添加聊天好友列表
 				this.$store.commit('addData',this.$route.params.id)
 			}
+			// 发送请求到后台清除num
+			this.$store.dispatch('clearNum',{"user_id": _state.mycookie,"friend_id": _state.friendsmsg[this.$route.params.id].userId,"name": this.$route.params.id})
 			
 			// 切出聊天界面刷新聊天栏
 			this.$store.commit('CHANGELASTMSG')
@@ -110,9 +111,6 @@
 				} else {
 					e.value = null
 				}
-				
-				// 滚动条到最低
-				this.flowbutton()
 			},
 			// 遍历聊天列表
 			// 如果没有该聊天入口，在后台添加数据
@@ -139,15 +137,22 @@
 				var btview = document.getElementById('btview')
 				box.scrollIntoView(false);
 			},
+		},
+		watch: {
+			lists () {
+				// 滚动条到最低
+				this.flowbutton()
+			}
 		}
 
 
 	})
 </script>
 
-<style>
+<style scoped>
 	#btview {
-		height: 40px;
+		/* height: 40px; */
+		margin-bottom: 45px;
 	}
 	.input-box {
 		overflow-y: auto;
@@ -180,13 +185,11 @@
 		margin: 5px 0;
 		padding: 0 5px;
 	}
-	/*.myinput {
-		display: flex;
-	}*/
 	.text-input {
 		display: flex;
 		justify-content: space-between;
 		position: absolute;
+		z-index: 1000;
 		bottom: 0;
 		height: 7%;
 		width: 100%;
@@ -202,12 +205,14 @@
 		height: 28px;
 		line-height: 28px;
 	}
-	.text-input input {
-		width: 10%;
+	.my-send-bt {
+		width: 13%;
 		height: 30px;
 		border: none;
-		margin: 10px 20px 0 0;
+		margin: 10px 10px 0 0;
 		background: #FF8C00;
 		border-radius: 5px;
+		font-size: 13px;
+		padding: 0;
 	}
 </style>

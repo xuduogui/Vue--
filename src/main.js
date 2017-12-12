@@ -10,6 +10,7 @@ import store from './store/store'
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 
+Vue.config.devtools = true
 
 Vue.config.productionTip = false
 
