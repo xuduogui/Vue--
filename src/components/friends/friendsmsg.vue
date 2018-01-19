@@ -26,9 +26,10 @@
 			<span>个性签名</span>
 			<span>{{mymsg.describe}}</span>
 		</div>
+
 		<div 
 			class="gochat"
-			v-if="mymsg.name != $store.state.usermsg.myid.name"
+			v-if="mymsg.userId != $store.state.usermsg.myid.userId && $store.state.usermsg.myid.userId != 'myid'"
 		>
 			<p>
 				<router-link
@@ -41,7 +42,7 @@
 		<!-- 这里写一个修改资料的接口 -->
 		<div
 			class="gochat"
-			v-if="mymsg.userId == $store.state.usermsg.myid.userId"
+			v-if="mymsg.userId == $store.state.usermsg.myid.userId && $store.state.usermsg.myid.userId != 'myid'"
 		>
 			<p>
 				<router-link
@@ -50,6 +51,13 @@
 					修改资料
 				</router-link>
 			</p>
+		</div>
+		<!-- 登录 -->
+		<div
+			class="gochat"
+			v-if="$store.state.usermsg.myid.userId == 'myid'"
+		>
+			<p>登录</p>
 		</div>
 	</div>
 </template>
@@ -60,7 +68,7 @@
 		data: function (argument) {
 			// body...
 			return {
-				mymsg: {},
+				mymsg: this.$store.state.usermsg.myid,
 			}
 		},
 		mounted () {

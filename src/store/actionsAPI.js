@@ -78,7 +78,7 @@ export const actionsAPI = {
 
 
     // 发送消息到后台
-    sendMyMsg (context,msg) {
+    sendMyMsg (context, msg) {
     	axios({
     		method: 'post',
     		url: 'send.action',
@@ -91,7 +91,7 @@ export const actionsAPI = {
     },
 
     // 发起聊天向后台传递列表创建数据
-    sendChatList (context,msg) {
+    sendChatList (context, msg) {
     	axios({
     		method: 'post',
     		url: 'chatIn.action',
@@ -101,5 +101,29 @@ export const actionsAPI = {
     	}).catch(function () {
 			// 发送失败
     	})
-    },
+	},
+
+	// 聊天机器人接口
+	sendMyMsgToRobot (context, msg) {
+		axios.get('robot/tohome/' + msg.msg).then(
+			res => {
+				console.log(res.data.msg)
+				// 包装消息，res.data.msg
+				let obj = {
+					data: {
+						data: {
+							'msg': res.data.msg,
+							'date': msg.date,
+							'send_id': 'robotFriend',
+							'num': 0
+						}
+					}
+				}
+
+				context.commit('RECEIVEMSG', obj)
+			}
+		).catch(
+			err => console.log('出错了' + err)
+		)
+	}
 }

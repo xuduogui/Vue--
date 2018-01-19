@@ -12,14 +12,28 @@
 				<span>{{list.msg}}</span>
 			</router-link>
 		</div>
+
 		<div style="height: 20px"></div>
+
+		<!-- 机器人
+		<div>
+			<router-link
+				class="friendsbus"
+				:to="'/friendsmsg/'+$store.state.robotFriend.userId"
+			>
+				<img :src="$store.state.robotFriend.img" width="35" height="35" class="borderra">
+				<span>{{$store.state.robotFriend.name}}</span>
+			</router-link>
+		</div> -->
+		<!-- 好友 -->
+		
 		<div>
 			<router-link
 				class="friendsbus"
 				:to="'/friendsmsg/'+list.userId"
 				v-for="list in lists"
 				:key="list.name"
-				v-if="list.userId != $store.state.mycookie"
+				v-if="list.userId != $store.state.mycookie && list.userId != 'myowmid'"
 			>
 				<img :src="list.img" width="35" height="35" class="borderra">
 				<span>{{list.name}}</span>
@@ -59,6 +73,7 @@
 		mounted: function (argument) {
 			// 显示导航
 			this.$store.commit('appear')
+
 		},
 	})
 </script>

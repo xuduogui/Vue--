@@ -65,7 +65,7 @@ export default {
     // 好友列表，聊天栏列表
     this.$store.dispatch('getChatData')
     // 调用接收请求
-    this.$store.dispatch('receiveMsg')   
+    this.$store.dispatch('receiveMsg')
   },
 }
 

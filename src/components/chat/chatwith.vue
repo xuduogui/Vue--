@@ -33,6 +33,11 @@
 				lists: this.$store.state.chatcontent[this.$route.params.id]
 			}
 		},
+		computed: {
+			// lists () {
+			// 	return this.$store.state.chatcontent[this.$route.params.id]
+			// }
+		},
 		mounted: function () {
 			// 隐藏导航
 			this.$store.commit('disappear')
@@ -65,7 +70,7 @@
 		},
 		methods: {
 			// 发送消息
-			input: function () {
+			input () {
 				// 更新个人信息
     			this.$store.commit('CHANGEMYMSG') 
 				// 更新界面
@@ -94,6 +99,7 @@
 				mylist.msg = e.value
 				// 更新数据
 				if (e.value.length != 0 && e.value != '\n') {
+					
 					// 发送消息
 					// 这里改变了store，隐式，存在待优化
 					// 将自己发送的内容push进store
@@ -101,10 +107,17 @@
 					// 已经动态加载，解决了推迟信息的问题，并且没有隐式改变
 					// 获取聊天对象的名字
 					var _id = this.$route.params.id
-					this.$store.commit('TACKCHAT',{id:_id,msg:mylist})
+					// this.$store.commit('ADDCHATCONTENT', _id)
+					this.$store.commit('addData', _id)
+					this.$store.commit('TACKCHAT',{id: _id,msg: mylist})
 
-					// 向后台发送
-					this.$store.dispatch('sendMyMsg',{"msg": mylist.msg,"userId": mylist.userId,"aimUserId": mylist.aimUserId,})
+					// 向后台发送,判断是否是机器人，分别使用不同的api
+					if (mylist.aimUserId != 'robotFriend') {
+						this.$store.dispatch('sendMyMsg', {"msg": mylist.msg,"userId": mylist.userId,"aimUserId": mylist.aimUserId,})
+					} else {
+						this.$store.dispatch('sendMyMsgToRobot', {"msg": mylist.msg, 'date': mylist.time})
+					}
+					
 
 					// 清空输入框
 					e.value = null;
@@ -116,7 +129,7 @@
 			// 如果没有该聊天入口，在后台添加数据
 			// 暂时没有及时的动态刷新
 			// 已经动态刷新
-			getDate: function () {
+			getDate () {
 				var num = 0
 				// 获取对方的名字
 				var id = this.$route.params.id
