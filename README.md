@@ -45,4 +45,7 @@ npm run build --report
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
+目前只提供了聊天机器人的后台：
+
+  https://github.com/xuduogui/koa-chat-robot-tuling
 
