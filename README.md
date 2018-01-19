@@ -1,4 +1,5 @@
 目前已经实现：
+
           1.即时聊天的实现
           2.好友列表的动态生成
           3.好友聊天栏的删除，动态生成
@@ -7,6 +8,7 @@
           6.界面的优化处理
           7.后台友好交互
           8.消息的提醒和提醒数目显示
+          9.添加了图灵聊天机器人
 
 
 技术栈：HTML,CSS,JS,vue-router,vuex,axios,Mint UI,vue-cli，webpack，Babel，git
@@ -38,3 +40,5 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
