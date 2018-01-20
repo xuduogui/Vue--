@@ -45,6 +45,10 @@ npm run build --report
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
+前台项目预览，由于没有好友数据的后台，好友栏只提供了机器人
+
+地址： https://xuduogui.github.io/xuduogui.io/vueChat/index.html
+
 目前只提供了聊天机器人的后台：
 
   https://github.com/xuduogui/koa-chat-robot-tuling
